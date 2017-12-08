@@ -1,0 +1,21 @@
+{
+  "name": "NoteTool",
+  "version": "1.0.0",
+  "description": "A minimal Electron application",
+  "main": "main.js",
+  "scripts": {
+    "start": "electron ."
+  },
+  "repository": "https://github.com/xLasercut/NoteTool",
+  "keywords": [
+    "Electron",
+    "quick",
+    "start",
+    "tutorial",
+    "demo"
+  ],
+  "author": "Lasercut",
+  "devDependencies": {
+    "electron": "~1.7.8"
+  }
+}
