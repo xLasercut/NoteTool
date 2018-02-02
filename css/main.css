@@ -83,3 +83,12 @@ body {
 #add_new_btn:active {
     background-color: var(--pistachio);
 }
+
+
+#addnote_title {
+    width: 100%;
+}
+
+#addnote_text {
+    width: 100%;
+}
