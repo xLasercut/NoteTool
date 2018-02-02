@@ -2,14 +2,22 @@
 <html>
     <head>
         <meta charset="UTF-8">
-        <title>Hello World!</title>
-        <link rel="stylesheet" href="main.scss">
+        <title>NoteTool</title>
+        <link rel="stylesheet" href="main.css">
+
     </head>
     <body>
-        <h1>Hello World!</h1>
-        <script>
-            // You can also require other files to run in this process
-            require('./renderer.js')
-        </script>
+        <div id="navbar">
+            <div id="navbarinfo">Notes</div>
+            <button id="add_new_btn">Add New</button>
+        </div>
+
+        <div id="notebar">
+            <script>
+                // You can also require other files to run in this process
+                require('./renderer.js')
+            </script>
+        </div>
+
     </body>
 </html>

@@ -21,15 +21,29 @@ function read_file (file_path) {
     return deferred.promise;
 }
 
+function create_note (note_data, i) {
+    var note_container = document.createElement("div");
+    note_container.setAttribute("id", "note" + i)
+    note_container.setAttribute("class", "note_container");
+    document.getElementById("notebar").appendChild(note_container);
+
+    var note_header = document.createElement("div");
+    note_header.setAttribute("class", "note_header");
+    note_header.textContent = note_data.title;
+    document.getElementById("note" + i).appendChild(note_header);
+
+    var note_body = document.createElement("div");
+    note_body.setAttribute("class", "note_body");
+    note_body.textContent = note_data.message;
+    document.getElementById("note" + i).appendChild(note_body);
+}
+
 var note_data = path.join(__dirname, "Data", "NoteData.Json");
 
 read_file(note_data)
 .then(function (data) {
     for (var i = 0; i < data.length; i++) {
-        var div = document.createElement("div");
-        div.setAttribute("class", "note");
-        div.textContent = data[i].message;
-        document.body.appendChild(div);
+        create_note(data[i], i);
     }
     console.log(data);
 })

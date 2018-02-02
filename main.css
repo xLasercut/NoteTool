@@ -1,0 +1,84 @@
+:root {
+    --raisin-black: #272727;
+    --pewter-blue: #90A9B7;
+    --french-beige: #D4AA7D;
+    --tuscan: #EFD09E;
+    --pastel-grey: #D2D8B3;
+    --pastel-green: #7DDF64;
+    --pistachio: #A1CF6B;
+    --mantis: #7AC74F;
+}
+
+body {
+    background-color: var(--raisin-black);
+}
+
+#navbar {
+    width: calc(100% - 20px);
+    float: left;
+    padding-left: 10px;
+    padding-right: 10px;
+    height: 50px;
+    background: none;
+}
+
+#navbarinfo {
+    height: 100%;
+    float: left;
+    color: var(--pastel-grey);
+    line-height: 50px;
+}
+
+#notebar {
+    width: 100%;
+    float: left;
+}
+
+
+.note_container {
+    background: none;
+    width: calc(50% - 20px);
+    margin: 10px;
+    float: left;
+}
+
+
+.note_header {
+    width: 100%;
+    float: left;
+    background-color: var(--french-beige);
+    margin: 0;
+    text-align: center;
+    color: var(--raisin-black);
+}
+
+.note_body {
+    width: 100%;
+    float: left;
+    background-color: var(--tuscan);
+    margin: 0;
+    text-align: justify;
+    color: var(--raisin-black);
+}
+
+
+#add_new_btn {
+    float: right;
+    display: block;
+    height: 100%;
+    width: 20%;
+    max-width: 200px;
+    border: none;
+    background-color: var(--mantis);
+    outline: none;
+    cursor: pointer;
+    border-radius: 5px;
+}
+
+#add_new_btn:hover {
+    background-color: var(--pastel-green);
+}
+
+#add_new_btn:active {
+    background-color: var(--pistachio);
+}
