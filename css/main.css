@@ -59,6 +59,7 @@ body {
     margin: 0;
     text-align: justify;
     color: var(--raisin-black);
+    white-space: pre-wrap;
 }
 
 
