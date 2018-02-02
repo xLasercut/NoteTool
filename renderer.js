@@ -15,7 +15,7 @@ function read_file (file_path) {
             deferred.reject(err);
         }
         else {
-            deferred.resolve(data);
+            deferred.resolve(JSON.parse(data));
         }
     });
     return deferred.promise;
@@ -23,6 +23,16 @@ function read_file (file_path) {
 
 var note_data = path.join(__dirname, "Data", "NoteData.Json");
 
-read_file(note_data).then(function (data) {
+read_file(note_data)
+.then(function (data) {
+    for (var i = 0; i < data.length; i++) {
+        var div = document.createElement("div");
+        div.setAttribute("class", "note");
+        div.textContent = data[i].message;
+        document.body.appendChild(div);
+    }
     console.log(data);
+})
+.catch(function (error) {
+    console.log(error)
 });
