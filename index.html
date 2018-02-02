@@ -3,20 +3,20 @@
     <head>
         <meta charset="UTF-8">
         <title>NoteTool</title>
-        <link rel="stylesheet" href="main.css">
-
+        <link rel="stylesheet" href="css/main.css">
+        <script>
+            require('./js/renderer.js')
+            require('./js/btn-functions.js')
+        </script>
     </head>
     <body>
         <div id="navbar">
             <div id="navbarinfo">Notes</div>
-            <button id="add_new_btn">Add New</button>
+            <button id="add_new_btn">Add Note</button>
         </div>
 
         <div id="notebar">
-            <script>
-                // You can also require other files to run in this process
-                require('./renderer.js')
-            </script>
+
         </div>
 
     </body>
