@@ -42,7 +42,7 @@ function create_note (note_data, i) {
     edit_btn.setAttribute("id", "edit_btn");
 }
 
-var note_data = path.join(__dirname, "Data", "NoteData.Json");
+var note_data = path.join(__dirname, "..", "Data", "NoteData.Json");
 
 read_file(note_data)
 .then(function (data) {

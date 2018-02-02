@@ -4,15 +4,15 @@
         <meta charset="UTF-8">
         <title>NoteTool</title>
         <link rel="stylesheet" href="css/main.css">
+        <script src="js/btn-functions.js"></script>
         <script>
             require('./js/renderer.js')
-            require('./js/btn-functions.js')
         </script>
     </head>
     <body>
         <div id="navbar">
             <div id="navbarinfo">Notes</div>
-            <button id="add_new_btn">Add Note</button>
+            <button id="add_new_btn" onclick="open_add_window()">Add Note</button>
         </div>
 
         <div id="notebar">
