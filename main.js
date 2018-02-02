@@ -10,6 +10,7 @@ const url = require('url')
 // Keep a global reference of the window object, if you don't, the window will
 // be closed automatically when the JavaScript object is garbage collected.
 let mainWindow
+let add_window
 
 function createWindow () {
   // Create the browser window.
@@ -31,6 +32,26 @@ function createWindow () {
         // in an array if your app supports multi windows, this is the time
         // when you should delete the corresponding element.
         mainWindow = null
+    })
+}
+
+function open_add_window () {
+    add_window = new BrowserWindow({ width: 800, height: 600 });
+    add_window.loadURL(url.format({
+        pathname: path.join(__dirname, 'addnote.html'),
+        protocol: 'file:',
+        slashes: true
+    }));
+
+    // Open the DevTools.
+    add_window.webContents.openDevTools()
+
+    // Emitted when the window is closed.
+    add_window.on('closed', function () {
+        // Dereference the window object, usually you would store windows
+        // in an array if your app supports multi windows, this is the time
+        // when you should delete the corresponding element.
+        add_window = null
     })
 }
 
