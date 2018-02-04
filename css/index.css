@@ -1,0 +1,57 @@
+#navbar {
+    width: calc(100% - 20px);
+    float: left;
+    padding-left: 10px;
+    padding-right: 10px;
+    background: none;
+    height: 50px;
+}
+
+#navbarHeader {
+    height: 100%;
+    float: left;
+    color: var(--pastel-grey);
+    line-height: 50px;
+}
+
+#noteDiv {
+    width: 100%;
+    float: left;
+}
+
+
+.noteContainer {
+    background: none;
+    width: calc(50% - 20px);
+    margin: 10px;
+    float: left;
+}
+
+
+.noteHeader {
+    width: 100%;
+    float: left;
+    background-color: var(--french-beige);
+    margin: 0;
+    text-align: center;
+    color: var(--raisin-black);
+    font-size: 16pt;
+}
+
+.noteBody {
+    width: 100%;
+    float: left;
+    background-color: var(--tuscan);
+    margin: 0;
+    text-align: justify;
+    color: var(--raisin-black);
+    white-space: pre-wrap;
+    font-size: 14pt;
+}
+
+
+#btnAddNote {
+    height: 100%;
+    width: 20%;
+    max-width: 200px;
+}
