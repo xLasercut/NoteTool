@@ -9,28 +9,35 @@ function openAddNoteWindow () {
 }
 
 function addNewNote () {
-    var message = document.getElementById("addNoteTitle");
-    var title = document.getElementById("addNoteBody");
-    newNote = {
-        title: title.value,
-        message: message.value
-    };
+    var message = document.getElementById("addNoteTitle").value;
+    var title = document.getElementById("addNoteBody").value;
 
-    var noteFileUrl = path.join(__dirname, "..", "..", "data", "note-data.json")
-
-    fileHelper.readNoteFile(noteFileUrl)
-    .then (function (data) {
-        data.push(newNote);
-        return fileHelper.writeNoteFile(noteFileUrl, data)
-    })
-    .then (function (msg) {
-        console.log(msg);
+    if (title === "" && message === "") {
         var currentWindow = remote.getCurrentWindow();
         currentWindow.close();
-    })
-    .catch (function (err) {
-        console.log(err);
-    });
+    }
+    else {
+        newNote = {
+            title: title,
+            message: message
+        };
+
+        var noteFileUrl = path.join(__dirname, "..", "..", "data", "note-data.json")
+
+        fileHelper.readNoteFile(noteFileUrl)
+        .then (function (data) {
+            data.push(newNote);
+            return fileHelper.writeNoteFile(noteFileUrl, data)
+        })
+        .then (function (msg) {
+            console.log(msg);
+            var currentWindow = remote.getCurrentWindow();
+            currentWindow.close();
+        })
+        .catch (function (err) {
+            console.log(err);
+        });
+    }
 }
 
 function cancelNewNote () {
