@@ -3,16 +3,17 @@
     <head>
         <meta charset="UTF-8">
         <title>NoteTool</title>
-        <link rel="stylesheet" href="css/main.css">
-        <script src="js/btn-functions.js"></script>
+        <link rel="stylesheet" type="text/css" href="./css/main.css">
         <script>
-            require('./js/renderer.js')
+            require('coffeescript').register();
+            require('./src/note-renderer.coffee');
+            require('./src/btn-function.coffee');
         </script>
     </head>
     <body>
         <div id="navbar">
             <div id="navbarinfo">Notes</div>
-            <button id="add_new_btn" onclick="open_add_window()">Add Note</button>
+            <button id="add_new_btn" onclick="openAddNoteWindow()">Add Note</button>
         </div>
 
         <div id="notebar">
