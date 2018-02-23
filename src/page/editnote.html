@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title>Edit Note</title>
+        <link rel="stylesheet" href="../../css/main.css" type="text/css">
+        <link rel="stylesheet" href="../../css/edit-note.css" type="text/css">
+    </head>
+    <body>
+        <div id="headerContainer">
+            Edit Note
+        </div>
+
+        <div id="titleContainer">
+            <input id="editNoteTitle">
+        </div>
+
+        <div id="bodyContainer">
+            <textarea id="editNoteBody"></textarea>
+        </div>
+        <div id="btnContainer">
+            <button id="btnCancelEditNote" class="btnRed">Cancel</a>
+            <button id="btnAddEditNote" class="btnGreen">Confirm</a>
+        </div>
+    </body>
+    <script>
+        require("../script/renderer-editnote.js")
+    </script>
+</html>

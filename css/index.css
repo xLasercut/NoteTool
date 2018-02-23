@@ -55,3 +55,45 @@
     width: 20%;
     max-width: 200px;
 }
+
+.btnEdit {
+    border: none;
+    outline: none;
+    display: block;
+    float: right;
+    cursor: pointer;
+    background: none;
+    font-size: 16pt;
+    color: var(--note-icon-normal);
+    margin: 1px;
+}
+
+.btnEdit:hover {
+    color: var(--raisin-black);
+}
+
+.btnEdit:active {
+    margin-top: 2px;
+    margin-bottom: 0px;
+}
+
+.btnDelete {
+    margin: 1px;
+    border: none;
+    outline: none;
+    display: block;
+    float: right;
+    cursor: pointer;
+    background: none;
+    font-size: 16pt;
+    color: var(--note-icon-normal);
+}
+
+.btnDelete:hover {
+    color: var(--raisin-black);
+}
+
+.btnDelete:active {
+    margin-top: 2px;
+    margin-bottom: 0px;
+}

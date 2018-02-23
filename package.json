@@ -1,25 +1,24 @@
 {
-  "name": "NoteTool",
+  "name": "notetool",
   "version": "1.0.0",
-  "description": "A minimal Electron application",
-  "main": "boot.js",
+  "description": "Note tool written using electron",
+  "main": "main.js",
   "scripts": {
-    "start": "electron ."
+    "test": "electron ."
   },
-  "repository": "https://github.com/xLasercut/NoteTool",
-  "keywords": [
-    "Electron",
-    "quick",
-    "start",
-    "tutorial",
-    "demo"
-  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/xLasercut/NoteTool.git"
+  },
   "author": "Lasercut",
-  "devDependencies": {
-    "electron": "^1.7.12"
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/xLasercut/NoteTool/issues"
   },
+  "homepage": "https://github.com/xLasercut/NoteTool#readme",
   "dependencies": {
-    "coffeescript": "^2.2.0",
+    "electron": "^1.8.2",
+    "jquery": "^3.3.1",
     "q": "^1.5.1"
   }
 }

@@ -1,5 +1,7 @@
 :root {
     --raisin-black: #272727;
+    --smoky-black: #0F0F0F;
+    --beaver: #967358;
     --pewter-blue: #90A9B7;
     --french-beige: #D4AA7D;
     --tuscan: #EFD09E;
@@ -10,10 +12,11 @@
     --base-red: #BA324F;
     --light-red: #BD4F6C;
     --lighter-red: #FF5964;
+    --note-icon-normal: #704c26
 }
 
 body {
-    background-color: var(--raisin-black);
+    background-color: var(--beaver);
 }
 
 .btnGreen {
