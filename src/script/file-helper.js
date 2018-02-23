@@ -59,7 +59,7 @@ module.exports.ensureDataFile = function (basePath, fileName) {
     var fullPath = path.join(basePath, fileName)
     if (fs.existsSync(basePath)) {
         if (!fs.existsSync(fullPath)) {
-            createNoteFile(fullPath, [])
+            createNoteFile(fullPath, {})
             .then (function (msg) {
                 console.log(msg)
             })
