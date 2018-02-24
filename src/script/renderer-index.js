@@ -37,7 +37,7 @@ function createChildWindow (childWindow, parentWindow, url, height, width, event
         parent: parentWindow
     })
 
-    if (process.env.DEBUG) {
+    if (process.env.DEBUG === true) {
         childWindow.webContents.openDevTools()
     }
     else {

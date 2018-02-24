@@ -10,7 +10,7 @@
 #navbarHeader {
     height: 100%;
     float: left;
-    color: var(--pastel-grey);
+    color: var(--raisin-black);
     line-height: 50px;
 }
 
@@ -51,15 +51,25 @@
 
 
 .btnNormal {
-    height: 100%;
-    width: 20%;
-    max-width: 200px;
+    height: calc(100% - 10px);
     border: none;
     outline: none;
     display: block;
     float: right;
     border-radius: 2px;
     cursor: pointer;
+    margin: 5px;
+    font-size: 14pt;
+    background-color: var(--french-beige);
+    color: var(--raisin-black);
+}
+.btnNormal:hover {
+    background-color: var(--tuscan);
+}
+
+.btnNormal:active {
+    margin-top: 7px;
+    margin-bottom: 3px;
 }
 
 .btnEdit {

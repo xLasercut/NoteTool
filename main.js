@@ -6,7 +6,7 @@ const path = require('path')
 const fileHelper = require(path.join(__dirname, "src", "script", "file-helper.js"))
 
 
-process.env.DEBUG = true
+process.env.DEBUG = false
 process.env.CONFIG_PATH = path.join(__dirname, "config.json")
 
 let mainWindow
@@ -39,7 +39,7 @@ function createMainWindow () {
     })
 
     // Open the DevTools.
-    if (process.env.DEBUG) {
+    if (process.env.DEBUG === true) {
         mainWindow.webContents.openDevTools()
     }
     else {
