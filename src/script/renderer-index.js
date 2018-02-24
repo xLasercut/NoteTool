@@ -8,69 +8,45 @@ const fileHelper = require('./file-helper.js')
 
 let mainWindow = remote.getCurrentWindow()
 let addNoteWindow
-let editNotewindow
+let editNoteWindow
 
-function createAddNoteWindow () {
-    // Create the browser window.
-    var addNoteUrl = url.format({
-        pathname: path.join(__dirname, "..", "page", "addnote.html"),
-        protocol: "file:",
-        slashes: true
-    })
+var addNoteUrl = url.format({
+    pathname: path.join(__dirname, "..", "page", "addnote.html"),
+    protocol: "file:",
+    slashes: true
+})
 
-    addNoteWindow = new BrowserWindow({
-        width: 800,
-        height: 600,
+var editNoteUrl = url.format({
+    pathname: path.join(__dirname, "..", "page", "editnote.html"),
+    protocol: "file:",
+    slashes: true
+})
+
+var settingsUrl = url.format({
+    pathanem: path.join(__dirname, "..", "page", "settings.html"),
+    protocol: "file:",
+    slashes: true
+})
+
+function createChildWindow (childWindow, parentWindow, url, height, width, eventData) {
+    childWindow = new BrowserWindow({
+        width: width,
+        height: height,
         show: false,
-        parent: mainWindow
+        parent: parentWindow
     })
 
-    // and load the index.html of the app.
-    addNoteWindow.loadURL(addNoteUrl)
+    childWindow.loadURL(url)
 
-    addNoteWindow.once('ready-to-show', function () {
-        addNoteWindow.show()
+    childWindow.once('ready-to-show', function () {
+        childWindow.show()
+        if (eventData) {
+            childWindow.webContents.send(eventData.eventName, eventData.eventData)
+        }
     })
 
-    // Emitted when the window is closed.
-    addNoteWindow.on('closed', function () {
-        // Dereference the window object, usually you would store windows
-        // in an array if your app supports multi windows, this is the time
-        // when you should delete the corresponding element.
-        addNoteWindow = null
-    })
-}
-
-function createEditNoteWindow (data) {
-    // Create the browser window.
-    var editNoteUrl = url.format({
-        pathname: path.join(__dirname, "..", "page", "editnote.html"),
-        protocol: "file:",
-        slashes: true
-    })
-
-    editNoteWindow = new BrowserWindow({
-        width: 800,
-        height: 600,
-        show: false,
-        parent: mainWindow
-    })
-
-    // and load the index.html of the app.
-    editNoteWindow.loadURL(editNoteUrl)
-
-
-    editNoteWindow.once('ready-to-show', function () {
-        editNoteWindow.show()
-        editNoteWindow.webContents.send("noteData", data)
-    })
-
-    // Emitted when the window is closed.
-    editNoteWindow.on('closed', function () {
-        // Dereference the window object, usually you would store windows
-        // in an array if your app supports multi windows, this is the time
-        // when you should delete the corresponding element.
-        editNoteWindow = null
+    childWindow.on('closed', function () {
+        childWindow = null
     })
 }
 
@@ -137,11 +113,14 @@ $("#noteDiv").on("click", "button.btnEdit", function () {
     var noteHeader = $("#noteHeader" + noteId)
     var noteBody = $("#noteBody" + noteId)
     data = {
-        "noteId": noteId,
-        "title": noteHeader.text(),
-        "body": noteBody.text()
+        eventName: "noteData",
+        eventData: {
+            "noteId": noteId,
+            "title": noteHeader.text(),
+            "body": noteBody.text()
+        }
     }
-    createEditNoteWindow(data)
+    createChildWindow(editNoteWindow, mainWindow, editNoteUrl, 600, 800, data)
 })
 
 $("#noteDiv").on("click", "button.btnDelete", function () {
@@ -150,5 +129,5 @@ $("#noteDiv").on("click", "button.btnDelete", function () {
 })
 
 $("#btnAddNote").click(function () {
-    createAddNoteWindow()
+    createChildWindow(addNoteWindow, mainWindow, addNoteUrl, 600, 800)
 })
