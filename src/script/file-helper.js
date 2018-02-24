@@ -1,88 +1,56 @@
-const q = require('q')
 const fs = require('fs')
 const path = require('path')
 
 
-module.exports.readNoteFile = function (notePath) {
-    var deferred = q.defer()
-    fs.readFile(notePath, 'utf8', function (err, data) {
-        if (err) {
-            deferred.reject(err)
-        }
-        else {
-            deferred.resolve(JSON.parse(data))
-        }
-    })
-    return deferred.promise
+module.exports.readFile = function (filePath) {
+    try {
+        return JSON.parse(fs.readFileSync(filePath))
+    }
+    catch (err) {
+        console.log(err)
+    }
 }
 
-module.exports.writeNoteFile = function (notePath, noteData) {
-    var deferred = q.defer()
-    fs.writeFile(notePath, JSON.stringify(noteData), function (err) {
-        if (err) {
-            deferred.reject(err)
-        }
-        else {
-            deferred.resolve(notePath + " saved")
-        }
-    })
-    return deferred.promise
+module.exports.writeFile = function (filePath, fileData) {
+    try {
+        fs.writeFileSync(filePath, JSON.stringify(fileData))
+        console.log(`data written to: ${filePath}`)
+    }
+    catch (err) {
+        console.log(err)
+    }
 }
 
-function createNoteFile (filePath, fileData) {
-    var deferred = q.defer()
-    fs.appendFile(filePath, JSON.stringify(fileData), function (err) {
-        if (err) {
-            deferred.reject(err)
-        }
-        else {
-            deferred.resolve(filePath + " created")
-        }
-    })
-    return deferred.promise
+function createFile (filePath, fileData) {
+    try {
+        fs.appendFileSync(filePath, JSON.stringify(fileData))
+        console.log(`create file: ${filePath}`)
+    }
+    catch (err) {
+        console.log(err)
+    }
+
 }
 
-function createNoteFolder (folderPath) {
-    var deferred = q.defer()
-    fs.mkdir(folderPath, function (err) {
-        if (err) {
-            deferred.reject(err)
-        }
-        else {
-            deferred.resolve(folderPath + " created")
-        }
-    })
-    return deferred.promise
+function createFolder (folderPath) {
+    try {
+        fs.mkdirSync(folderPath)
+        console.log(`created folder: ${folderPath}`)
+    }
+    catch (err) {
+        console.log(err)
+    }
 }
 
-module.exports.ensureDataFile = function (basePath, fileName) {
-    var fullPath = path.join(basePath, fileName)
-    if (fs.existsSync(basePath)) {
-        if (!fs.existsSync(fullPath)) {
-            createNoteFile(fullPath, {})
-            .then (function (msg) {
-                console.log(msg)
-            })
-            .catch (function (err) {
-                console.log(err)
-            })
+module.exports.ensureFile = function (filePath, fileData) {
+    var dirname = path.dirname(filePath)
+    if (fs.existsSync(dirname)) {
+        if (!fs.existsSync(filePath)) {
+            createFile(filePath, fileData)
         }
     }
     else {
-        createNoteFolder(basePath)
-        .then (function (msg) {
-            console.log(msg)
-        })
-        .catch (function (err) {
-            console.log(err)
-        })
-
-        createNoteFile(fullPath, [])
-        .then (function (msg) {
-            console.log(msg)
-        })
-        .catch (function (err) {
-            console.log(err)
-        })
+        createFolder(dirname)
+        createFile(filePath, fileData)
     }
 }

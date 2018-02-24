@@ -9,6 +9,7 @@ const fileHelper = require('./file-helper.js')
 let mainWindow = remote.getCurrentWindow()
 let addNoteWindow
 let editNoteWindow
+let settingsWindow
 
 var addNoteUrl = url.format({
     pathname: path.join(__dirname, "..", "page", "addnote.html"),
@@ -23,7 +24,7 @@ var editNoteUrl = url.format({
 })
 
 var settingsUrl = url.format({
-    pathanem: path.join(__dirname, "..", "page", "settings.html"),
+    pathname: path.join(__dirname, "..", "page", "settings.html"),
     protocol: "file:",
     slashes: true
 })
@@ -35,6 +36,13 @@ function createChildWindow (childWindow, parentWindow, url, height, width, event
         show: false,
         parent: parentWindow
     })
+
+    if (process.env.DEBUG) {
+        childWindow.webContents.openDevTools()
+    }
+    else {
+        childWindow.setMenu(null)
+    }
 
     childWindow.loadURL(url)
 
@@ -68,36 +76,18 @@ function createNote (noteData, noteId) {
 
 
 function renderNotes () {
-    var noteFileName = "note-data.json"
-    var noteFileBasePath = path.join(__dirname, "..", "..", "data")
-    var noteFileUrl = path.join(noteFileBasePath, noteFileName)
-    fileHelper.ensureDataFile(noteFileBasePath, noteFileName)
-
-    fileHelper.readNoteFile(noteFileUrl)
-    .then (function (data) {
-        for (var id in data) {
-            createNote(data[id], id)
-        }
-    })
-    .catch (function (error) {
-        console.log(error)
-    })
+    fileHelper.ensureFile(process.env.DATA_PATH, {})
+    var data = fileHelper.readFile(process.env.DATA_PATH)
+    for (var id in data) {
+        createNote(data[id], id)
+    }
 }
 
 function deleteNote (id) {
-    var noteFileUrl = path.join(__dirname, "..", "..", "data", "note-data.json")
-    fileHelper.readNoteFile(noteFileUrl)
-    .then (function (data) {
-        delete data[id]
-        return fileHelper.writeNoteFile(noteFileUrl, data)
-    })
-    .then (function (msg) {
-        console.log(msg)
-        mainWindow.reload()
-    })
-    .catch (function (error) {
-        console.log(error)
-    })
+    var data = fileHelper.readFile(process.env.DATA_PATH)
+    delete data[id]
+    fileHelper.writeFile(process.env.DATA_PATH, data)
+    mainWindow.reload()
 }
 
 
@@ -130,4 +120,8 @@ $("#noteDiv").on("click", "button.btnDelete", function () {
 
 $("#btnAddNote").click(function () {
     createChildWindow(addNoteWindow, mainWindow, addNoteUrl, 600, 800)
+})
+
+$("#btnSettings").click(function () {
+    createChildWindow(settingsWindow, mainWindow, settingsUrl, 600, 800)
 })

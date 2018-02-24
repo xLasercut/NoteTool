@@ -3,61 +3,39 @@ const remote = require('electron').remote
 const $ = require('jquery')
 const path = require('path')
 
-const maxNote = 1000
+var currentWindow = remote.getCurrentWindow()
+var mainWinow = currentWindow.getParentWindow()
 
 function generateNoteId (noteData) {
-    id = Math.floor(Math.random() * maxNote)
+    id = Math.floor(Math.random() * process.env.MAX_NOTE)
     while (noteData[id]) {
-        id = Math.floor(Math.random() * maxNote)
+        id = Math.floor(Math.random() * process.env.MAX_NOTE)
     }
     return id
 }
 
-function closeWindow () {
-    var currentWindow = remote.getCurrentWindow()
-    currentWindow.close()
-}
-
-function reloadParent() {
-    var parentWindow = remote.getCurrentWindow().getParentWindow()
-    parentWindow.reload()
-}
-
 function addNewNote () {
+    fileHelper.ensureFile(process.env.DATA_PATH, {})
     var message = $("#addNoteBody").val()
     var title = $("#addNoteTitle").val()
 
-    if (title === "" && message === "") {
-        closeWindow()
-    }
-    else {
-        newNote = {
+    if (!(title === "" && message === "")) {
+        var newNote = {
             title: title,
             message: message
         }
-
-        var noteFileUrl = path.join(__dirname, "..", "..", "data", "note-data.json")
-
-        fileHelper.readNoteFile(noteFileUrl)
-        .then (function (data) {
-            if (Object.keys(data).length < maxNote){
-                noteId = generateNoteId(data)
-                data[noteId] = newNote
-                return fileHelper.writeNoteFile(noteFileUrl, data)
-            }
-            else {
-                alert("Max number of note reached, please delete note before creating new note")
-            }
-        })
-        .then (function (msg) {
-            console.log(msg)
-            reloadParent()
-            closeWindow()
-        })
-        .catch (function (err) {
-            console.log(err)
-        })
+        var data = fileHelper.readFile(process.env.DATA_PATH)
+        if (Object.keys(data).length < process.env.MAX_NOTE){
+            var noteId = generateNoteId(data)
+            data[noteId] = newNote
+            fileHelper.writeFile(process.env.DATA_PATH, data)
+            mainWinow.reload()
+        }
+        else {
+            alert(`Reached note limit of: ${process.env.MAX_NOTE}`)
+        }
     }
+    currentWindow.close()
 }
 
 $("#btnAddNewNote").click(function () {
@@ -65,5 +43,5 @@ $("#btnAddNewNote").click(function () {
 })
 
 $("#btnCancelNewNote").click(function () {
-    closeWindow()
+    currentWindow.close()
 })

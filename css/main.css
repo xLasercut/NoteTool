@@ -54,3 +54,46 @@ body {
 .btnRed:active {
     background-color: var(--lighter-red);
 }
+
+.headerContainer {
+    width: 100%;
+    float: left;
+    text-align: center;
+    padding-bottom: 5px;
+}
+
+.titleContainer {
+    width: 100%;
+    float: left;
+    text-align: center;
+    padding-top: 5px;
+    padding-bottom: 5px;
+}
+
+.bodyContainer {
+    width: 100%;
+    float: left;
+    text-align: center;
+    padding-top: 5px;
+}
+
+.btnContainer {
+    width: 100%;
+    float: left;
+}
+
+.inputTitle {
+    width: 98%;
+    text-align: center;
+}
+
+.inputBody {
+    width: 94%;
+    height: 400px;
+    resize: none;
+    text-align: justify;
+    margin: none;
+    padding: none;
+    border: none;
+    outline: none;
+}

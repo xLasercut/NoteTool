@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title>Settings</title>
+        <link rel="stylesheet" href="../../css/main.css" type="text/css">
+        <link rel="stylesheet" href="../../css/add-note.css" type="text/css">
+    </head>
+    <body>
+        <div class="headerContainer">
+            settings
+        </div>
+
+        <div class="titleContainer">
+            data path: <input id="dataPath"><br>
+            max number of notes: <input id="maxNote">
+        </div>
+
+        <div class="btnContainer">
+            <button id="btnChangeSetting" class="btnRed">Cancel</button>
+            <button id="btnCancelChangeSetting" class="btnGreen">Confirm</button>
+        </div>
+    </body>
+    <script>
+        require("../script/renderer-settings.js")
+    </script>
+</html>

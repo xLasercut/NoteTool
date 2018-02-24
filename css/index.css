@@ -50,10 +50,16 @@
 }
 
 
-#btnAddNote {
+.btnNormal {
     height: 100%;
     width: 20%;
     max-width: 200px;
+    border: none;
+    outline: none;
+    display: block;
+    float: right;
+    border-radius: 2px;
+    cursor: pointer;
 }
 
 .btnEdit {

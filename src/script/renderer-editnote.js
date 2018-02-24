@@ -1,7 +1,6 @@
 const ipcRenderer = require('electron').ipcRenderer
 const remote = require('electron').remote
 const $ = require('jquery')
-const path = require('path')
 const fileHelper = require('./file-helper.js')
 
 var passedData = null
@@ -15,31 +14,18 @@ ipcRenderer.on("noteData", function(evt, data) {
 })
 
 function saveChanges () {
+    fileHelper.ensureFile(process.env.DATA_PATH, {})
     var message = $("#editNoteBody").val()
     var title = $("#editNoteTitle").val()
 
-    if (title === "" && message === "") {
-        currentWindow.close()
+    if (!(title === "" && message === "")) {
+        var data = fileHelper.readFile(process.env.DATA_PATH)
+        data[passedData.noteId].title = title
+        data[passedData.noteId].message = message
+        fileHelper.writeFile(process.env.DATA_PATH, data)
+        parentWindow.reload()
     }
-    else {
-        var noteFileUrl = path.join(__dirname, "..", "..", "data", "note-data.json")
-
-        fileHelper.readNoteFile(noteFileUrl)
-        .then (function (data) {
-
-            data[passedData.noteId].title = title
-            data[passedData.noteId].message = message
-            return fileHelper.writeNoteFile(noteFileUrl, data)
-        })
-        .then (function (msg) {
-            console.log(msg)
-            parentWindow.reload()
-            currentWindow.close()
-        })
-        .catch (function (err) {
-            console.log(err)
-        })
-    }
+    currentWindow.close()
 }
 
 $("#btnAddEditNote").click(function () {

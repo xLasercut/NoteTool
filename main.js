@@ -1,14 +1,27 @@
 const electron = require('electron')
 // Module to control application life.
 const { app, BrowserWindow } = require('electron')
-//const BrowserWindow = require('electron');
-
-const path = require('path')
 const url = require('url')
+const path = require('path')
+const fileHelper = require(path.join(__dirname, "src", "script", "file-helper.js"))
 
-const DEBUG = false
+
+process.env.DEBUG = true
+process.env.CONFIG_PATH = path.join(__dirname, "config.json")
 
 let mainWindow
+
+function initialChecks () {
+    var defaultConfig = {
+        dataPath: path.join(__dirname, "data", "note-data.json"),
+        maxNote: 1000
+    }
+    fileHelper.ensureFile(process.env.CONFIG_PATH, defaultConfig)
+    var configData = fileHelper.readFile(process.env.CONFIG_PATH)
+    process.env.DATA_PATH = configData.dataPath
+    process.env.MAX_NOTE = configData.maxNote
+    fileHelper.ensureFile(process.env.DATA_PATH, {})
+}
 
 
 function createMainWindow () {
@@ -25,6 +38,14 @@ function createMainWindow () {
         show: false
     })
 
+    // Open the DevTools.
+    if (process.env.DEBUG) {
+        mainWindow.webContents.openDevTools()
+    }
+    else {
+        mainWindow.setMenu(null)
+    }
+
     // and load the index.html of the app.
     mainWindow.loadURL(mainUrl)
 
@@ -32,10 +53,6 @@ function createMainWindow () {
         mainWindow.show()
     })
 
-    // Open the DevTools.
-    if (DEBUG) {
-        mainWindow.webContents.openDevTools()
-    }
 
     // Emitted when the window is closed.
     mainWindow.on('closed', function () {
@@ -51,6 +68,7 @@ function createMainWindow () {
 // initialization and is ready to create browser windows.
 // Some APIs can only be used after this event occurs.
 app.on('ready', function () {
+    initialChecks()
     createMainWindow()
 })
 
