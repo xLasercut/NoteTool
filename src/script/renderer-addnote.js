@@ -6,16 +6,20 @@ const path = require('path')
 var currentWindow = remote.getCurrentWindow()
 var mainWinow = currentWindow.getParentWindow()
 
+var globalObj = remote.getGlobal("sharedObj")
+var dataPath = globalObj.dataPath
+var maxNote = globalObj.maxNote
+
 function generateNoteId (noteData) {
-    id = Math.floor(Math.random() * process.env.MAX_NOTE)
+    id = Math.floor(Math.random() * maxNote)
     while (noteData[id]) {
-        id = Math.floor(Math.random() * process.env.MAX_NOTE)
+        id = Math.floor(Math.random() * maxNote)
     }
     return id
 }
 
 function addNewNote () {
-    fileHelper.ensureFile(process.env.DATA_PATH, {})
+    fileHelper.ensureFile(dataPath, {})
     var message = $("#addNoteBody").val()
     var title = $("#addNoteTitle").val()
 
@@ -24,15 +28,15 @@ function addNewNote () {
             title: title,
             message: message
         }
-        var data = fileHelper.readFile(process.env.DATA_PATH)
-        if (Object.keys(data).length < process.env.MAX_NOTE){
+        var data = fileHelper.readFile(dataPath)
+        if (Object.keys(data).length < maxNote){
             var noteId = generateNoteId(data)
             data[noteId] = newNote
-            fileHelper.writeFile(process.env.DATA_PATH, data)
+            fileHelper.writeFile(dataPath, data)
             mainWinow.reload()
         }
         else {
-            alert(`Reached note limit of: ${process.env.MAX_NOTE}`)
+            alert(`Reached note limit of: ${maxNote}`)
         }
     }
     currentWindow.close()

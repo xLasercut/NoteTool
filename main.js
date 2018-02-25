@@ -6,8 +6,13 @@ const path = require('path')
 const fileHelper = require(path.join(__dirname, "src", "script", "file-helper.js"))
 
 
-process.env.DEBUG = false
-process.env.CONFIG_PATH = path.join(__dirname, "config.json")
+global.sharedObj = {
+    debug: true,
+    configPath: path.join(__dirname, "config.json")
+}
+
+var debug = global.sharedObj.debug
+var configPath = global.sharedObj.configPath
 
 let mainWindow
 
@@ -16,11 +21,11 @@ function initialChecks () {
         dataPath: path.join(__dirname, "data", "note-data.json"),
         maxNote: 1000
     }
-    fileHelper.ensureFile(process.env.CONFIG_PATH, defaultConfig)
-    var configData = fileHelper.readFile(process.env.CONFIG_PATH)
-    process.env.DATA_PATH = configData.dataPath
-    process.env.MAX_NOTE = configData.maxNote
-    fileHelper.ensureFile(process.env.DATA_PATH, {})
+    fileHelper.ensureFile(configPath, defaultConfig)
+    var configData = fileHelper.readFile(configPath)
+    global.sharedObj["dataPath"] = configData.dataPath
+    global.sharedObj["maxNote"] = configData.maxNote
+    fileHelper.ensureFile(configData.dataPath, {})
 }
 
 
@@ -39,7 +44,7 @@ function createMainWindow () {
     })
 
     // Open the DevTools.
-    if (process.env.DEBUG === true) {
+    if (debug) {
         mainWindow.webContents.openDevTools()
     }
     else {

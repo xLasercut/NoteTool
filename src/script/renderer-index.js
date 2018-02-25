@@ -10,6 +10,10 @@ let mainWindow = remote.getCurrentWindow()
 let addNoteWindow
 let editNoteWindow
 let settingsWindow
+var globalObj = remote.getGlobal("sharedObj")
+
+var debug = globalObj.debug
+var dataPath = globalObj.dataPath
 
 var addNoteUrl = url.format({
     pathname: path.join(__dirname, "..", "page", "addnote.html"),
@@ -37,7 +41,7 @@ function createChildWindow (childWindow, parentWindow, url, height, width, event
         parent: parentWindow
     })
 
-    if (process.env.DEBUG === true) {
+    if (debug) {
         childWindow.webContents.openDevTools()
     }
     else {
@@ -76,17 +80,17 @@ function createNote (noteData, noteId) {
 
 
 function renderNotes () {
-    fileHelper.ensureFile(process.env.DATA_PATH, {})
-    var data = fileHelper.readFile(process.env.DATA_PATH)
+    fileHelper.ensureFile(dataPath, {})
+    var data = fileHelper.readFile(dataPath)
     for (var id in data) {
         createNote(data[id], id)
     }
 }
 
 function deleteNote (id) {
-    var data = fileHelper.readFile(process.env.DATA_PATH)
+    var data = fileHelper.readFile(dataPath)
     delete data[id]
-    fileHelper.writeFile(process.env.DATA_PATH, data)
+    fileHelper.writeFile(dataPath, data)
     mainWindow.reload()
 }
 

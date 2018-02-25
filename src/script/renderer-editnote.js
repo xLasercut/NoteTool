@@ -7,6 +7,9 @@ var passedData = null
 var currentWindow = remote.getCurrentWindow()
 var parentWindow = currentWindow.getParentWindow()
 
+var globalObj = remote.getGlobal("sharedObj")
+var dataPath = globalObj.dataPath
+
 ipcRenderer.on("noteData", function(evt, data) {
     passedData = data
     $("#editNoteTitle").val(data.title)
@@ -14,15 +17,15 @@ ipcRenderer.on("noteData", function(evt, data) {
 })
 
 function saveChanges () {
-    fileHelper.ensureFile(process.env.DATA_PATH, {})
+    fileHelper.ensureFile(dataPath, {})
     var message = $("#editNoteBody").val()
     var title = $("#editNoteTitle").val()
 
     if (!(title === "" && message === "")) {
-        var data = fileHelper.readFile(process.env.DATA_PATH)
+        var data = fileHelper.readFile(dataPath)
         data[passedData.noteId].title = title
         data[passedData.noteId].message = message
-        fileHelper.writeFile(process.env.DATA_PATH, data)
+        fileHelper.writeFile(dataPath, data)
         parentWindow.reload()
     }
     currentWindow.close()
