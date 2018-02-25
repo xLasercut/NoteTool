@@ -6,9 +6,9 @@ const path = require('path')
 var currentWindow = remote.getCurrentWindow()
 var mainWinow = currentWindow.getParentWindow()
 
-var globalObj = remote.getGlobal("sharedObj")
-var dataPath = globalObj.dataPath
-var maxNote = globalObj.maxNote
+const globalObj = remote.getGlobal("sharedObj")
+const dataPath = globalObj.dataPath
+const maxNote = globalObj.maxNote
 
 function generateNoteId (noteData) {
     id = Math.floor(Math.random() * maxNote)

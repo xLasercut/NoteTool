@@ -7,8 +7,8 @@ var passedData = null
 var currentWindow = remote.getCurrentWindow()
 var parentWindow = currentWindow.getParentWindow()
 
-var globalObj = remote.getGlobal("sharedObj")
-var dataPath = globalObj.dataPath
+const globalObj = remote.getGlobal("sharedObj")
+const dataPath = globalObj.dataPath
 
 ipcRenderer.on("noteData", function(evt, data) {
     passedData = data

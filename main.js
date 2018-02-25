@@ -11,8 +11,8 @@ global.sharedObj = {
     configPath: path.join(__dirname, "config.json")
 }
 
-var debug = global.sharedObj.debug
-var configPath = global.sharedObj.configPath
+const debug = global.sharedObj.debug
+const configPath = global.sharedObj.configPath
 
 let mainWindow
 

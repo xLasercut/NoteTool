@@ -10,10 +10,10 @@ let mainWindow = remote.getCurrentWindow()
 let addNoteWindow
 let editNoteWindow
 let settingsWindow
-var globalObj = remote.getGlobal("sharedObj")
+const globalObj = remote.getGlobal("sharedObj")
 
-var debug = globalObj.debug
-var dataPath = globalObj.dataPath
+const debug = globalObj.debug
+const dataPath = globalObj.dataPath
 
 var addNoteUrl = url.format({
     pathname: path.join(__dirname, "..", "page", "addnote.html"),
