@@ -1,11 +1,11 @@
 #btnAddNewNote {
     height: 30px;
     width: 120px;
-    margin: 10px;
+    font-size: 14pt;
 }
 
 #btnCancelNewNote {
     height: 30px;
     width: 120px;
-    margin: 10px;
+    font-size: 14pt;
 }

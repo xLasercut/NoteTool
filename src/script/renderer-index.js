@@ -33,10 +33,11 @@ var settingsUrl = url.format({
     slashes: true
 })
 
-function createChildWindow (childWindow, parentWindow, url, height, width, eventData) {
+function createChildWindow (childWindow, parentWindow, url, height, width, resizable, eventData) {
     childWindow = new BrowserWindow({
         width: width,
         height: height,
+        resizable: resizable,
         show: false,
         parent: parentWindow
     })
@@ -114,7 +115,7 @@ $("#noteDiv").on("click", "button.btnEdit", function () {
             "body": noteBody.text()
         }
     }
-    createChildWindow(editNoteWindow, mainWindow, editNoteUrl, 600, 800, data)
+    createChildWindow(editNoteWindow, mainWindow, editNoteUrl, 600, 800, true, data)
 })
 
 $("#noteDiv").on("click", "button.btnDelete", function () {
@@ -123,9 +124,9 @@ $("#noteDiv").on("click", "button.btnDelete", function () {
 })
 
 $("#btnAddNote").click(function () {
-    createChildWindow(addNoteWindow, mainWindow, addNoteUrl, 600, 800)
+    createChildWindow(addNoteWindow, mainWindow, addNoteUrl, 600, 800, true)
 })
 
 $("#btnSettings").click(function () {
-    createChildWindow(settingsWindow, mainWindow, settingsUrl, 300, 600)
+    createChildWindow(settingsWindow, mainWindow, settingsUrl, 200, 600, false)
 })

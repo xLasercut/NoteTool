@@ -9,8 +9,8 @@
     --base-green: #77AD78;
     --light-green: #95D7AE;
     --lighter-green: #A2C5AC;
-    --base-red: #BA324F;
-    --light-red: #BD4F6C;
+    --base-red: #c23f48;
+    --light-red: #FF5964;
     --lighter-red: #FF5964;
     --note-icon-normal: #704c26
 }
@@ -23,6 +23,7 @@
 body {
     background-color: var(--beaver);
     font-family: "roboto";
+    color: var(--raisin-black);
 }
 
 .btnGreen {
@@ -33,6 +34,7 @@ body {
     border-radius: 2px;
     cursor: pointer;
     background-color: var(--base-green);
+    margin: 10px;
 }
 
 .btnGreen:hover {
@@ -40,7 +42,8 @@ body {
 }
 
 .btnGreen:active {
-    background-color: var(--lighter-green);
+    margin-top: 12px;
+    margin-bottom: 8px;
 }
 
 .btnRed {
@@ -50,6 +53,7 @@ body {
     float: right;
     border-radius: 2px;
     cursor: pointer;
+    margin: 10px;
     background-color: var(--base-red);
 }
 
@@ -58,7 +62,8 @@ body {
 }
 
 .btnRed:active {
-    background-color: var(--lighter-red);
+    margin-top: 12px;
+    margin-bottom: 8px;
 }
 
 .headerContainer {
@@ -79,6 +84,7 @@ body {
 }
 
 .bodyContainer {
+    height: 70vh;
     width: 100%;
     float: left;
     text-align: center;
@@ -95,17 +101,29 @@ body {
     text-align: center;
     font-family: inherit;
     font-size: 14pt;
+    color: var(--raisin-black);
+    background-color: var(--tuscan);
+    border: 1px solid var(--smoky-black);
+}
+
+.inputTitle:focus {
+    outline: 2px solid var(--smoky-black);
 }
 
 .inputBody {
     width: 94%;
-    height: 400px;
+    height: 100%;
     resize: none;
     text-align: justify;
     margin: none;
     padding: none;
-    border: none;
-    outline: none;
+    border: 1px solid var(--smoky-black);
     font-family: inherit;
     font-size: 12pt;
+    background-color: var(--tuscan);
+    color: var(--raisin-black);
+}
+
+.inputBody:focus {
+    outline: 2px solid var(--smoky-black);
 }

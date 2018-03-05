@@ -26,7 +26,11 @@
 #dataPath {
     float: right;
     width: 68%;
-    font-size: 11pt;
+    font-size: 14pt;
+    background-color: var(--beaver);
+    border: solid 1px var(--smoky-black);
+    color: var(--raisin-black);
+    padding-left: 5px;
 }
 
 #maxNoteLabel {
@@ -39,5 +43,23 @@
 #maxNote {
     float: right;
     width: 68%;
-    font-size: 11pt;
+    font-size: 14pt;
+    background-color: var(--tuscan);
+    color: var(--raisin-black);
+    border: solid 1px var(--smoky-black);
+    padding-left: 5px;
+}
+
+#maxNote:focus {
+    outline: 2px solid var(--smoky-black);
+}
+
+#btnChangeSetting {
+    height: 30px;
+    width: 80px;
+}
+
+#btnCancelChangeSetting {
+    height: 30px;
+    width: 80px;
 }
