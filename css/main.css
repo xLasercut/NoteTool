@@ -15,8 +15,14 @@
     --note-icon-normal: #704c26
 }
 
+@font-face {
+    font-family: "roboto";
+    src: url("../fonts/Roboto-Regular.ttf");
+}
+
 body {
     background-color: var(--beaver);
+    font-family: "roboto";
 }
 
 .btnGreen {
@@ -60,6 +66,8 @@ body {
     float: left;
     text-align: center;
     padding-bottom: 5px;
+    font-size: 20pt;
+    color: var(--raisin-black);
 }
 
 .titleContainer {
@@ -85,6 +93,8 @@ body {
 .inputTitle {
     width: 98%;
     text-align: center;
+    font-family: inherit;
+    font-size: 14pt;
 }
 
 .inputBody {
@@ -96,4 +106,6 @@ body {
     padding: none;
     border: none;
     outline: none;
+    font-family: inherit;
+    font-size: 12pt;
 }

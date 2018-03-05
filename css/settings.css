@@ -1,0 +1,43 @@
+#pathSelect {
+    opacity: 0;
+    position: absolute;
+    z-index: -1;
+}
+
+#btnPathSelect {
+    display: block;
+    float: left;
+    width: 30%;
+    cursor: pointer;
+    background-color: var(--french-beige);
+    font-size: 14pt;
+    border-radius: 2px;
+    color: var(--raisin-black);
+}
+
+#btnPathSelect:hover {
+    background-color: var(--tuscan);
+}
+
+#btnPathSelect:active {
+    margin-top: 1px;
+}
+
+#dataPath {
+    float: right;
+    width: 68%;
+    font-size: 11pt;
+}
+
+#maxNoteLabel {
+    display: block;
+    float: left;
+    width: 30%;
+    font-size: 14pt;
+}
+
+#maxNote {
+    float: right;
+    width: 68%;
+    font-size: 11pt;
+}

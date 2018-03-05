@@ -127,5 +127,5 @@ $("#btnAddNote").click(function () {
 })
 
 $("#btnSettings").click(function () {
-    createChildWindow(settingsWindow, mainWindow, settingsUrl, 600, 800)
+    createChildWindow(settingsWindow, mainWindow, settingsUrl, 300, 600)
 })

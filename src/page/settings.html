@@ -4,16 +4,18 @@
         <meta charset="UTF-8">
         <title>Settings</title>
         <link rel="stylesheet" href="../../css/main.css" type="text/css">
-        <link rel="stylesheet" href="../../css/add-note.css" type="text/css">
+        <link rel="stylesheet" href="../../css/settings.css" type="text/css">
     </head>
     <body>
         <div class="headerContainer">
-            settings
+            Settings
         </div>
 
         <div class="titleContainer">
-            data path: <input id="dataPath"><br>
-            max number of notes: <input id="maxNote"><br>
+            <label for="pathSelect" id="btnPathSelect">Choose Folder</label> <input id="dataPath" disabled="disabled">
+            <br>
+            <br>
+            <label id="maxNoteLabel">Max Note:</label> <input id="maxNote">
             <input type="file" id="pathSelect" webkitdirectory mozdirectory msdirectory odirectory directory multiple />
 
         </div>
