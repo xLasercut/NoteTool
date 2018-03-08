@@ -25,7 +25,7 @@ function initialChecks () {
     var configData = fileHelper.readFile(configPath)
     global.sharedObj["dataPath"] = configData.dataPath
     global.sharedObj["maxNote"] = configData.maxNote
-    fileHelper.ensureFile(configData.dataPath, {})
+    fileHelper.ensureFile(configData.dataPath, [])
 }
 
 

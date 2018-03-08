@@ -3,38 +3,37 @@ const remote = require('electron').remote
 const $ = require('jquery')
 const fileHelper = require('./file-helper.js')
 
-var passedData = null
 var currentWindow = remote.getCurrentWindow()
 var parentWindow = currentWindow.getParentWindow()
 
-const globalObj = remote.getGlobal("sharedObj")
-const dataPath = globalObj.dataPath
-
-ipcRenderer.on("noteData", function(evt, data) {
-    passedData = data
-    $("#editNoteTitle").val(data.title)
-    $("#editNoteBody").val(data.body)
-})
-
-function saveChanges () {
-    fileHelper.ensureFile(dataPath, {})
-    var message = $("#editNoteBody").val()
-    var title = $("#editNoteTitle").val()
-
-    if (!(title === "" && message === "")) {
-        var data = fileHelper.readFile(dataPath)
-        data[passedData.noteId].title = title
-        data[passedData.noteId].message = message
-        fileHelper.writeFile(dataPath, data)
-        parentWindow.reload()
+var editNoteApp = new Vue({
+    el: '#editNoteApp',
+    data: {
+        key: '',
+        noteTitle: '',
+        noteBody: ''
+    },
+    methods: {
+        saveEdittedNote: function () {
+            if (this.noteTitle && this.noteBody) {
+                var note = {
+                    key: this.key,
+                    title: this.noteTitle,
+                    message: this.noteBody
+                }
+                parentWindow.webContents.send("editNote", note)
+            }
+            currentWindow.close()
+        },
+        cancelEditNote: function () {
+            currentWindow.close()
+        }
     }
-    currentWindow.close()
-}
-
-$("#btnAddEditNote").click(function () {
-    saveChanges()
 })
 
-$("#btnCancelEditNote").click(function () {
-    currentWindow.close()
+
+ipcRenderer.on("editNoteData", function(evt, data) {
+    editNoteApp.key = data.key
+    editNoteApp.noteTitle = data.title
+    editNoteApp.noteBody = data.message
 })

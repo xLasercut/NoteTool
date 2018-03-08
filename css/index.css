@@ -47,6 +47,8 @@
     color: var(--raisin-black);
     white-space: pre-wrap;
     font-size: 14pt;
+    white-space: pre-wrap;
+    word-wrap: break-word;
 }
 
 

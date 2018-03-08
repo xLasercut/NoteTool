@@ -5,24 +5,26 @@
         <title>Settings</title>
         <link rel="stylesheet" href="../../css/main.css" type="text/css">
         <link rel="stylesheet" href="../../css/settings.css" type="text/css">
+        <script src="../script/vue.js"></script>
     </head>
     <body>
-        <div class="headerContainer">
-            Settings
-        </div>
+        <div id="settingsApp">
+            <div class="headerContainer">
+                Settings
+            </div>
 
-        <div class="titleContainer">
-            <label for="pathSelect" id="btnPathSelect">Choose Folder</label> <input id="dataPath" disabled="disabled">
-            <br>
-            <br>
-            <label id="maxNoteLabel">Max Note:</label> <input id="maxNote">
-            <input type="file" id="pathSelect" webkitdirectory mozdirectory msdirectory odirectory directory multiple />
+            <div class="titleContainer">
+                <label for="pathSelect" id="btnPathSelect">Choose Folder</label> <input id="dataPath" v-model="dataPath" disabled="disabled">
+                <br>
+                <br>
+                <label id="maxNoteLabel">Max Note:</label> <input id="maxNote" v-model="maxNote">
+                <input type="file" id="pathSelect" v-on:change="pathSelect($event)" webkitdirectory mozdirectory msdirectory odirectory directory multiple />
+            </div>
 
-        </div>
-
-        <div class="btnContainer">
-            <button id="btnCancelChangeSetting" class="btnRed">Cancel</button>
-            <button id="btnChangeSetting" class="btnGreen">Confirm</button>
+            <div class="btnContainer">
+                <button id="btnCancelChangeSetting" class="btnRed" v-on:click="closeWindow">Cancel</button>
+                <button id="btnChangeSetting" class="btnGreen" v-on:click="saveSettings">Confirm</button>
+            </div>
         </div>
     </body>
     <script>

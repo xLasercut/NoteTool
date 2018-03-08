@@ -4,6 +4,7 @@ const $ = require('jquery')
 const url = require('url')
 const path = require('path')
 const fileHelper = require('./file-helper.js')
+const ipcRenderer = require('electron').ipcRenderer
 
 
 let mainWindow = remote.getCurrentWindow()
@@ -14,6 +15,7 @@ const globalObj = remote.getGlobal("sharedObj")
 
 const debug = globalObj.debug
 const dataPath = globalObj.dataPath
+const maxNote = globalObj.maxNote
 
 var addNoteUrl = url.format({
     pathname: path.join(__dirname, "..", "page", "addnote.html"),
@@ -63,70 +65,72 @@ function createChildWindow (childWindow, parentWindow, url, height, width, resiz
     })
 }
 
-function createNote (noteData, noteId) {
-
-    var itemToAppend = '<div id="note' + noteId + '" class="noteContainer">' +
-                            '<div id="noteHeader' + noteId + '" class="noteHeader">' +
-                                noteData.title +
-                                '<button id="btnDeleteNote' + noteId + '" class="btnDelete"><i class="fas fa-trash-alt"></i></button>' +
-                                '<button id="btnEditNote' + noteId + '" class="btnEdit"><i class="fas fa-edit"></i></button>' +
-                            '</div>' +
-                            '<div id="noteBody' + noteId + '" class="noteBody">' +
-                                noteData.message +
-                            '</div>' +
-                        '</div>'
-
-    $("#noteDiv").append(itemToAppend)
+function findIndexOfId (data, id) {
+    return data.findIndex(function (t) {
+       return t.key == id
+    })
 }
 
-
-function renderNotes () {
-    fileHelper.ensureFile(dataPath, {})
-    var data = fileHelper.readFile(dataPath)
-    for (var id in data) {
-        createNote(data[id], id)
+function generateNoteId (data) {
+    id = Math.floor(Math.random() * Number(maxNote))
+    while (findIndexOfId(data, id) != -1) {
+        id = Math.floor(Math.random() * Number(maxNote))
     }
-}
-
-function deleteNote (id) {
-    var data = fileHelper.readFile(dataPath)
-    delete data[id]
-    fileHelper.writeFile(dataPath, data)
-    mainWindow.reload()
+    return id
 }
 
 
+fileHelper.ensureFile(dataPath, [])
 
-
-$(document).ready(function () {
-    renderNotes()
-})
-
-
-$("#noteDiv").on("click", "button.btnEdit", function () {
-    noteId = noteId = this.id.replace("btnEditNote", "")
-    var noteHeader = $("#noteHeader" + noteId)
-    var noteBody = $("#noteBody" + noteId)
-    data = {
-        eventName: "noteData",
-        eventData: {
-            "noteId": noteId,
-            "title": noteHeader.text(),
-            "body": noteBody.text()
+var indexApp = new Vue ({
+    el: '#indexApp',
+    data: {
+        noteData: fileHelper.readFile(dataPath)
+    },
+    methods: {
+        editNote: function (event) {
+            var index = findIndexOfId(this.noteData, event.currentTarget.id)
+            data = {
+                eventName: "editNoteData",
+                eventData: {
+                    key: event.currentTarget.id,
+                    title: this.noteData[index].title,
+                    message: this.noteData[index].message
+                }
+            }
+            createChildWindow(editNoteWindow, mainWindow, editNoteUrl, 600, 800, true, data)
+        },
+        deleteNote: function (event) {
+            var index = findIndexOfId(this.noteData, event.currentTarget.id)
+            this.noteData.splice(index, 1)
+            fileHelper.writeFile(dataPath, this.noteData)
+        },
+        openSettings: function () {
+            createChildWindow(settingsWindow, mainWindow, settingsUrl, 200, 600, false)
+        },
+        openAddNote: function () {
+            if (this.noteData.length >= Number(maxNote)) {
+                alert("Max number of notes reached")
+            }
+            else {
+                var id = generateNoteId(this.noteData)
+                var data = {
+                    eventName: "addNoteId",
+                    eventData: id
+                }
+                createChildWindow(addNoteWindow, mainWindow, addNoteUrl, 600, 800, true, data)
+            }
         }
     }
-    createChildWindow(editNoteWindow, mainWindow, editNoteUrl, 600, 800, true, data)
 })
 
-$("#noteDiv").on("click", "button.btnDelete", function () {
-    noteId = this.id.replace("btnDeleteNote", "")
-    deleteNote(noteId)
+ipcRenderer.on("addNewNote", function(evt, data) {
+    indexApp.noteData.unshift(data)
+    fileHelper.writeFile(dataPath, indexApp.noteData)
 })
 
-$("#btnAddNote").click(function () {
-    createChildWindow(addNoteWindow, mainWindow, addNoteUrl, 600, 800, true)
-})
-
-$("#btnSettings").click(function () {
-    createChildWindow(settingsWindow, mainWindow, settingsUrl, 200, 600, false)
+ipcRenderer.on("editNote", function(evt, data) {
+    var index = findIndexOfId(indexApp.noteData, data.key)
+    indexApp.noteData.splice(index, 1, data)
+    fileHelper.writeFile(dataPath, indexApp.noteData)
 })

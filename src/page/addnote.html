@@ -5,22 +5,25 @@
         <title>Add Note</title>
         <link rel="stylesheet" href="../../css/main.css" type="text/css">
         <link rel="stylesheet" href="../../css/add-note.css" type="text/css">
+        <script src="../script/vue.js"></script>
     </head>
     <body>
-        <div class="headerContainer">
-            Add Note
-        </div>
+        <div id="addNoteApp">
+            <div class="headerContainer">
+                Add Note
+            </div>
 
-        <div class="titleContainer">
-            <input id="addNoteTitle" class="inputTitle">
-        </div>
+            <div class="titleContainer">
+                <input class="inputTitle" v-model="noteTitle">
+            </div>
 
-        <div class="bodyContainer">
-            <textarea id="addNoteBody" class="inputBody"></textarea>
-        </div>
-        <div class="btnContainer">
-            <button id="btnCancelNewNote" class="btnRed">Cancel</button>
-            <button id="btnAddNewNote" class="btnGreen">Confirm</button>
+            <div class="bodyContainer">
+                <textarea class="inputBody" v-model="noteBody"></textarea>
+            </div>
+            <div class="btnContainer">
+                <button id="btnCancelNewNote" class="btnRed" v-on:click="cancelNewNote">Cancel</button>
+                <button id="btnAddNewNote" class="btnGreen" v-on:click="addNewNote">Confirm</button>
+            </div>
         </div>
     </body>
     <script>

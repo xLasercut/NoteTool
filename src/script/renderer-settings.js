@@ -9,26 +9,34 @@ var parentWindow = currentWindow.getParentWindow()
 const globalObj = remote.getGlobal("sharedObj")
 const configPath = globalObj.configPath
 
-$(document).ready(function () {
-    var config = fileHelper.readFile(configPath)
-    $("#dataPath").val(config.dataPath)
-    $("#maxNote").val(config.maxNote)
-
-    $("#btnChangeSetting").click(function () {
-        config.dataPath = $("#dataPath").val()
-        config.maxNote = $("#maxNote").val()
-        fileHelper.writeFile(configPath, config)
-        alert("New configurations set. Please restart note tool")
-        currentWindow.close()
-    })
-
-    $("#btnCancelChangeSetting").click(function () {
-        currentWindow.close()
-    })
-
-    $("#pathSelect").change(function (event) {
-        var theFiles = event.target.files
-        var dataPath = path.join(theFiles[0].path, "note-data.json")
-        $("#dataPath").val(dataPath)
-    })
+var settingsApp = new Vue({
+    el: "#settingsApp",
+    data: {
+        dataPath: '',
+        maxNote: ''
+    },
+    methods: {
+        pathSelect: function (event) {
+            var theFiles = event.target.files
+            this.dataPath = path.join(theFiles[0].path, "note-data.json")
+        },
+        closeWindow: function () {
+            currentWindow.close()
+        },
+        saveSettings: function () {
+            if (this.maxNote && this.dataPath) {
+                var config = {
+                    dataPath: this.dataPath,
+                    maxNote: this.maxNote
+                }
+                fileHelper.writeFile(configPath, config)
+                alert("New configurations set. Please restart Note Tool")
+            }
+            currentWindow.close()
+        }
+    }
 })
+
+var config = fileHelper.readFile(configPath)
+settingsApp.dataPath = config.dataPath
+settingsApp.maxNote = config.maxNote

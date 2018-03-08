@@ -5,22 +5,25 @@
         <title>Edit Note</title>
         <link rel="stylesheet" href="../../css/main.css" type="text/css">
         <link rel="stylesheet" href="../../css/edit-note.css" type="text/css">
+        <script src="../script/vue.js"></script>
     </head>
     <body>
-        <div class="headerContainer">
-            Edit Note
-        </div>
+        <div id="editNoteApp">
+            <div class="headerContainer">
+                Edit Note
+            </div>
 
-        <div class="titleContainer">
-            <input id="editNoteTitle" class="inputTitle">
-        </div>
+            <div class="titleContainer">
+                <input class="inputTitle" v-model="noteTitle">
+            </div>
 
-        <div class="bodyContainer">
-            <textarea id="editNoteBody" class="inputBody"></textarea>
-        </div>
-        <div class="btnContainer">
-            <button id="btnCancelEditNote" class="btnRed">Cancel</a>
-            <button id="btnAddEditNote" class="btnGreen">Confirm</a>
+            <div class="bodyContainer">
+                <textarea class="inputBody" v-model="noteBody"></textarea>
+            </div>
+            <div class="btnContainer">
+                <button id="btnCancelEditNote" class="btnRed" v-on:click="cancelEditNote">Cancel</a>
+                <button id="btnAddEditNote" class="btnGreen" v-on:click="saveEdittedNote">Confirm</a>
+            </div>
         </div>
     </body>
     <script>

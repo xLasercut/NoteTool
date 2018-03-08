@@ -6,21 +6,28 @@
         <link rel="stylesheet" href="../../css/main.css" type="text/css">
         <link rel="stylesheet" href="../../css/index.css" type="text/css">
         <script src="../script/fontawesome-all.js"></script>
+        <script src="../script/vue.js"></script>
     </head>
     <body>
-        <div id="navbar">
-            <div id="navbarHeader">
-                Notes
+        <div id="indexApp">
+            <div id="navbar">
+                <div id="navbarHeader">
+                    Notes
+                </div>
+                <button id="btnAddNote" class="btnNormal" v-on:click="openAddNote">Add Note <i class="fas fa-plus-square"></i></button>
+                <button id="btnSettings" class="btnNormal" v-on:click="openSettings">Settings <i class="fas fa-wrench"></i></button>
             </div>
-            <button id="btnAddNote" class="btnNormal">Add Note <i class="fas fa-plus-square"></i></button>
-            <button id="btnSettings" class="btnNormal">Settings <i class="fas fa-wrench"></i></button>
 
+            <div id="noteDiv">
+                <div class="noteContainer" v-for="item in noteData">
+                    <div class="noteHeader">{{ item.title }}
+                        <button :id="item.key" v-on:click="deleteNote($event)" class="btnDelete"><i class="fas fa-trash-alt"></i></button>
+                        <button :id="item.key" v-on:click="editNote($event)" class="btnEdit"><i class="fas fa-edit"></i></button>
+                    </div>
+                    <div class="noteBody">{{ item.message }}</div>
+                </div>
+            </div>
         </div>
-
-        <div id="noteDiv">
-
-        </div>
-
     </body>
     <script>
         require('../script/renderer-index.js')
