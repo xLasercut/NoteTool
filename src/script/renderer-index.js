@@ -1,6 +1,5 @@
 const remote = require('electron').remote
 const BrowserWindow = remote.BrowserWindow
-const $ = require('jquery')
 const url = require('url')
 const path = require('path')
 const fileHelper = require('./file-helper.js')

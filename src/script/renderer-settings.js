@@ -1,4 +1,3 @@
-const $ = require('jquery')
 const fileHelper = require('./file-helper.js')
 const remote = require('electron').remote
 const path = require('path')

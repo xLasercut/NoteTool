@@ -6,6 +6,9 @@
   "scripts": {
     "start": "electron ."
   },
+  "browser": {
+    "vue": "vue/dist/vue.runtime.common"
+  },
   "repository": {
     "type": "git",
     "url": "https://github.com/xLasercut/NoteTool.git"
@@ -17,8 +20,7 @@
   },
   "homepage": "https://github.com/xLasercut/NoteTool#readme",
   "dependencies": {
-    "electron": "^1.8.2",
-    "jquery": "^3.3.1"
+    "electron": "^1.8.2"
   },
   "devDependencies": {}
 }

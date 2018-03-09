@@ -1,6 +1,5 @@
 const fileHelper = require('./file-helper.js')
 const remote = require('electron').remote
-const $ = require('jquery')
 const path = require('path')
 const ipcRenderer = require('electron').ipcRenderer
 

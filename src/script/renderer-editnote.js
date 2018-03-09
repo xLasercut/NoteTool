@@ -1,6 +1,5 @@
 const ipcRenderer = require('electron').ipcRenderer
 const remote = require('electron').remote
-const $ = require('jquery')
 const fileHelper = require('./file-helper.js')
 
 var currentWindow = remote.getCurrentWindow()
