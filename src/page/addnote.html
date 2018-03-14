@@ -4,7 +4,6 @@
         <meta charset="UTF-8">
         <title>Add Note</title>
         <link rel="stylesheet" href="../../css/main.css" type="text/css">
-        <link rel="stylesheet" href="../../css/add-note.css" type="text/css">
         <script src="../script/vue.js"></script>
     </head>
     <body>
@@ -21,8 +20,8 @@
                 <textarea class="inputBody" v-model="noteBody"></textarea>
             </div>
             <div class="btnContainer">
-                <button id="btnCancelNewNote" class="btnRed" v-on:click="cancelNewNote">Cancel</button>
-                <button id="btnAddNewNote" class="btnGreen" v-on:click="addNewNote">Confirm</button>
+                <button class="btn btnRed" v-on:click="cancelNewNote">Cancel</button>
+                <button class="btn btnGreen" v-on:click="addNewNote">Confirm</button>
             </div>
         </div>
     </body>

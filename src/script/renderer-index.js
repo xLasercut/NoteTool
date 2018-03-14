@@ -105,7 +105,7 @@ var indexApp = new Vue ({
             fileHelper.writeFile(dataPath, this.noteData)
         },
         openSettings: function () {
-            createChildWindow(settingsWindow, mainWindow, settingsUrl, 200, 600, false)
+            createChildWindow(settingsWindow, mainWindow, settingsUrl, 400, 600, false)
         },
         openAddNote: function () {
             if (this.noteData.length >= Number(maxNote)) {

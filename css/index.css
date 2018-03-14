@@ -1,20 +1,26 @@
-#navbar {
-    width: calc(100% - 20px);
-    float: left;
+.navbar {
+    width: calc(100% - 10px);
+    display: block;
     padding-left: 10px;
-    padding-right: 10px;
-    background: none;
-    height: 50px;
+    margin: 0;
+    background: var(--japanese-indigo);
+    height: 60px;
+    color: white;
+    font-family: inherit;
 }
 
-#navbarHeader {
+.navbarHeader {
     height: 100%;
     float: left;
-    color: var(--raisin-black);
-    line-height: 50px;
+    color: inherit;
+    line-height: 60px;
 }
 
-#noteDiv {
+.btnNav {
+    font-size: 14pt;
+}
+
+.noteDiv {
     width: 100%;
     float: left;
 }
@@ -31,87 +37,36 @@
 .noteHeader {
     width: 100%;
     float: left;
-    background-color: var(--french-beige);
+    background-color: var(--japanese-indigo);
     margin: 0;
     text-align: center;
-    color: var(--raisin-black);
+    color: white;
     font-size: 16pt;
+    font-family: inherit;
+    white-space: pre-wrap;
+    word-wrap: break-word;
+    border: 1px solid var(--japanese-indigo);
+    border-bottom: none;
+}
+
+.btnNote {
+    font-size: 16pt;
+    width: 10%;
+    min-width: 50px;
 }
 
 .noteBody {
-    width: 100%;
+    width: calc(100% - 20px);
     float: left;
-    background-color: var(--tuscan);
+    background-color: var(--desert-sand);
     margin: 0;
     text-align: justify;
-    color: var(--raisin-black);
+    color: black;
     white-space: pre-wrap;
     font-size: 14pt;
     white-space: pre-wrap;
     word-wrap: break-word;
-}
-
-
-.btnNormal {
-    height: calc(100% - 10px);
-    border: none;
-    outline: none;
-    display: block;
-    float: right;
-    border-radius: 2px;
-    cursor: pointer;
-    margin: 5px;
-    font-size: 14pt;
-    background-color: var(--french-beige);
-    color: var(--raisin-black);
-}
-.btnNormal:hover {
-    background-color: var(--tuscan);
-}
-
-.btnNormal:active {
-    margin-top: 7px;
-    margin-bottom: 3px;
-}
-
-.btnEdit {
-    border: none;
-    outline: none;
-    display: block;
-    float: right;
-    cursor: pointer;
-    background: none;
-    font-size: 16pt;
-    color: var(--note-icon-normal);
-    margin: 1px;
-}
-
-.btnEdit:hover {
-    color: var(--raisin-black);
-}
-
-.btnEdit:active {
-    margin-top: 2px;
-    margin-bottom: 0px;
-}
-
-.btnDelete {
-    margin: 1px;
-    border: none;
-    outline: none;
-    display: block;
-    float: right;
-    cursor: pointer;
-    background: none;
-    font-size: 16pt;
-    color: var(--note-icon-normal);
-}
-
-.btnDelete:hover {
-    color: var(--raisin-black);
-}
-
-.btnDelete:active {
-    margin-top: 2px;
-    margin-bottom: 0px;
+    border: 1px solid var(--japanese-indigo);
+    border-top: none;
+    padding: 10px;
 }

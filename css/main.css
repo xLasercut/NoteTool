@@ -1,18 +1,17 @@
 :root {
-    --raisin-black: #272727;
-    --smoky-black: #0F0F0F;
-    --beaver: #967358;
-    --pewter-blue: #90A9B7;
-    --french-beige: #D4AA7D;
-    --tuscan: #EFD09E;
-    --pastel-grey: #D2D8B3;
+    --japanese-indigo: #2A3D45;
+    --desert-sand: #DDC9B4;
+    --khaki: #BCAC9B;
+    --old-rose: #C17C74;
+    --old-rose-dark: #9b645d;
+    --old-rose-light: #ce9790;
+    --deep-taupe: #7A6C5D;
     --base-green: #77AD78;
-    --light-green: #95D7AE;
-    --lighter-green: #A2C5AC;
-    --base-red: #c23f48;
-    --light-red: #FF5964;
-    --lighter-red: #FF5964;
-    --note-icon-normal: #704c26
+    --light-green: #92bd93;
+    --dark-green: #608b60;
+    --base-red: #cf5858;
+    --light-red: #d87979;
+    --dark-red: #a64747;
 }
 
 @font-face {
@@ -21,109 +20,132 @@
 }
 
 body {
-    background-color: var(--beaver);
+    background-color: var(--khaki);
     font-family: "roboto";
-    color: var(--raisin-black);
+    color: white;
+    margin: 0;
+    transition: all 0.3s;
 }
 
-.btnGreen {
-    border: none;
+.btn {
+    height: 100%;
     outline: none;
     display: block;
     float: right;
-    border-radius: 2px;
     cursor: pointer;
+    color: white;
+    background-color: var(--old-rose);
+    border: none;
+    font-family: "roboto";
+    transition: all 0.3s;
+    border-bottom: 5px solid var(--old-rose-dark);
+}
+
+.btn:hover {
+    background-color: var(--old-rose-light);
+    border-bottom: 5px solid var(--old-rose);
+}
+
+.btn:active {
+    padding-top: 5px;
+    padding-bottom: -5px;
+    border-bottom: 1px solid var(--old-rose);
+}
+
+.btnGreen {
+    width: 100px;
+    font-size: 12pt;
     background-color: var(--base-green);
-    margin: 10px;
+    border-bottom: 5px solid var(--dark-green);
 }
 
 .btnGreen:hover {
     background-color: var(--light-green);
+    border-bottom: 5px solid var(--base-green);
 }
 
 .btnGreen:active {
-    margin-top: 12px;
-    margin-bottom: 8px;
+    border-bottom: 1px solid var(--base-green);
 }
 
 .btnRed {
-    border: none;
-    outline: none;
-    display: block;
-    float: right;
-    border-radius: 2px;
-    cursor: pointer;
-    margin: 10px;
+    width: 100px;
+    font-size: 12pt;
     background-color: var(--base-red);
+    border-bottom: 5px solid var(--dark-red);
 }
 
 .btnRed:hover {
     background-color: var(--light-red);
+    border-bottom: 5px solid var(--base-red);
 }
 
 .btnRed:active {
-    margin-top: 12px;
-    margin-bottom: 8px;
+    border-bottom: 1px solid var(--base-red);
 }
 
 .headerContainer {
     width: 100%;
     float: left;
     text-align: center;
-    padding-bottom: 5px;
-    font-size: 20pt;
-    color: var(--raisin-black);
+    font-size: 16pt;
+    color: white;
+    background-color: var(--japanese-indigo);
+    height: 40px;
+    line-height: 40px;
 }
 
 .titleContainer {
     width: 100%;
+    height: 50px;
+    padding-top: 20px;
     float: left;
     text-align: center;
-    padding-top: 5px;
-    padding-bottom: 5px;
 }
 
 .bodyContainer {
-    height: 70vh;
+    height: calc(100vh - 150px);
+    min-height: 350px;
     width: 100%;
     float: left;
     text-align: center;
-    padding-top: 5px;
 }
 
 .btnContainer {
     width: 100%;
+    height: 40px;
     float: left;
+    background-color: var(--japanese-indigo);
 }
 
 .inputTitle {
-    width: 98%;
+    width: 94%;
     text-align: center;
     font-family: inherit;
     font-size: 14pt;
-    color: var(--raisin-black);
-    background-color: var(--tuscan);
-    border: 1px solid var(--smoky-black);
+    color: black;
+    background-color: var(--desert-sand);
+    border: 1px solid var(--japanese-indigo);
 }
 
 .inputTitle:focus {
-    outline: 2px solid var(--smoky-black);
+    outline: 2px solid var(--japanese-indigo);
 }
 
 .inputBody {
-    width: 94%;
-    height: 100%;
+    width: 90%;
+    height: 94%;
     resize: none;
     text-align: justify;
     margin: none;
     padding: none;
-    border: 1px solid var(--smoky-black);
+    border: 1px solid var(--japanese-indigo);
     font-family: inherit;
     font-size: 12pt;
-    background-color: var(--tuscan);
-    color: var(--raisin-black);
+    background-color: var(--desert-sand);
+    color: black;
 }
 
 .inputBody:focus {
-    outline: 2px solid var(--smoky-black);
+    outline: 2px solid var(--japanese-indigo);
 }
