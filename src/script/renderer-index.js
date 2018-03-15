@@ -4,6 +4,43 @@ const url = require('url')
 const path = require('path')
 const fileHelper = require('./file-helper.js')
 const ipcRenderer = require('electron').ipcRenderer
+var marked = require('marked')
+var renderer = new marked.Renderer();
+// Super simple sanitizer
+function sanitize(str) {
+    return str.replace(/&<"/g, function (m) {
+        if (m === "&") return "&amp;"
+        if (m === "<") return "&lt;"
+        return "&quot;"
+    })
+}
+
+/**
+ * Make Marked support specifying image size in pixels in this format:
+ *
+ * ![alt](src = x WIDTH "title")
+ * ![alt](src = HEIGHT x "title")
+ * ![alt](src = HEIGHT x WIDTH "title")
+ *
+ * Note: whitespace from the equals sign to the title/end of image is all
+ * optional. Each of the above examples are equivalent to these below,
+ * respectively:
+ *
+ * ![alt](src =xWIDTH "title")
+ * ![alt](src =HEIGHTx "title")
+ * ![alt](src =HEIGHTxWIDTH "title")
+ *
+ * Example usage:
+ *
+ * ![my image](https://example.com/my-image.png =400x600 "My image")
+ */
+renderer.image = function (src, title, alt) {
+    var exec = /\s=\s*(\d*)\s*x\s*(\d*)\s*$/.exec(src)
+    var res = '<img src="' + sanitize(src) + '" alt="' + sanitize(alt)
+    if (exec && exec[1]) res += '" height="' + exec[1]
+    if (exec && exec[2]) res += '" width="' + exec[2]
+    return res + '">'
+}
 
 
 let mainWindow = remote.getCurrentWindow()
@@ -121,7 +158,7 @@ var indexApp = new Vue ({
             }
         },
         compileMessage(message) {
-            return marked(message, {sanitize: true})
+            return marked(message, {sanitize: true, renderer: renderer})
         }
     }
 })
