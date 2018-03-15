@@ -119,6 +119,9 @@ var indexApp = new Vue ({
                 }
                 createChildWindow(addNoteWindow, mainWindow, addNoteUrl, 600, 800, true, data)
             }
+        },
+        compileMessage(message) {
+            return marked(message, {sanitize: true})
         }
     }
 })

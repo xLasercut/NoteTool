@@ -7,6 +7,7 @@
         <link rel="stylesheet" href="../../css/index.css" type="text/css">
         <script src="../script/fontawesome-all.js"></script>
         <script src="../script/vue.js"></script>
+        <script src="../script/marked.min.js"></script>
     </head>
     <body>
         <div id="indexApp">
@@ -23,7 +24,7 @@
                     <div class="noteHeader">
                         <div><button :id="item.key" v-on:click="deleteNote($event)" class="btn btnNote"><i class="fas fa-trash-alt"></i></button><button :id="item.key" v-on:click="editNote($event)" class=" btn btnNote"><i class="fas fa-edit"></i></button></div><div style="width: 100%;">{{ item.title }}</div>
                     </div>
-                    <div class="noteBody">{{ item.message }}</div>
+                    <div class="noteBody" v-html="compileMessage(item.message)"></div>
                 </div>
             </div>
         </div>
