@@ -7,7 +7,7 @@ const fileHelper = require(path.join(__dirname, "src", "script", "file-helper.js
 
 
 global.sharedObj = {
-    debug: false,
+    debug: true,
     configPath: path.join(__dirname, "config.json")
 }
 

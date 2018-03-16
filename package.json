@@ -17,8 +17,7 @@
   },
   "homepage": "https://github.com/xLasercut/NoteTool#readme",
   "dependencies": {
-    "electron": "^1.8.2",
-    "marked": "^0.3.17"
+    "electron": "^1.8.2"
   },
   "devDependencies": {}
 }
