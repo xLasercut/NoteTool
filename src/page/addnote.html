@@ -16,8 +16,12 @@
                 <input class="inputTitle" v-model="noteTitle">
             </div>
 
+            <div class="formatBtnContainer">
+                <button class="btn" v-for="button in buttons" v-on:click="addTag(button)">{{ button }}</button>
+            </div>
+
             <div class="bodyContainer">
-                <textarea class="inputBody" v-model="noteBody"></textarea>
+                <textarea class="inputBody" ref="ta" v-model="noteBody"></textarea>
             </div>
             <div class="btnContainer">
                 <button class="btn btnRed" v-on:click="cancelNewNote">Cancel</button>

@@ -103,8 +103,15 @@ body {
     text-align: center;
 }
 
+.formatBtnContainer {
+    width: 100%;
+    float: left;
+    height: 30px;
+    background-color: var(--japanese-indigo);
+}
+
 .bodyContainer {
-    height: calc(100vh - 150px);
+    height: calc(100vh - 180px);
     min-height: 350px;
     width: 100%;
     float: left;

@@ -25,7 +25,7 @@ const conversionMap = {
         return replacementStr
     },
     link: function (src) {
-        var linkProperties = src.split(" ")
+        var linkProperties = src.split("  ")
         var linkUrl = linkProperties[0]
         var linkText = linkProperties[1]
 
@@ -119,4 +119,12 @@ module.exports.renderItems = function (str) {
         str = convertItems(str, type)
     }
     return str
+}
+
+module.exports.getFormatBtns = function () {
+    var buttons = []
+    for (type in conversionMap) {
+        buttons.push(type)
+    }
+    return buttons
 }
