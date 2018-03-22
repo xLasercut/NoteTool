@@ -107,7 +107,13 @@ body {
     width: 100%;
     float: left;
     height: 30px;
-    background-color: var(--japanese-indigo);
+    text-align: center;
+}
+
+.formatBtnContainerInner {
+    height: 100%;
+    width: 90%;
+    margin-left: 5%;
 }
 
 .bodyContainer {

@@ -16,7 +16,9 @@
                 <input class="inputTitle" v-model="noteTitle">
             </div>
             <div class="formatBtnContainer">
-                <button class="btn" v-for="button in buttons" v-on:click="addTag(button)">{{ button }}</button>
+                <div class="formatBtnContainerInner">
+                    <button class="btn" v-for="button in buttons" v-on:click="addTag(button)">{{ button }}</button>
+                </div>
             </div>
             <div class="bodyContainer">
                 <textarea class="inputBody" ref="ta" v-model="noteBody"></textarea>
