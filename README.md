@@ -4,3 +4,4 @@ Tool for taking notes
 
 Requirements:
 Node js
+Electron
