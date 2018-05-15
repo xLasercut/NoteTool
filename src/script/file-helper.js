@@ -54,7 +54,7 @@ class FileHelper {
         }
         else {
             createFolder(dirname)
-            createFile(fileData)
+            createFile(this.filePath, fileData)
         }
     }
 }
