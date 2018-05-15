@@ -3,7 +3,7 @@ const electron = require('electron')
 const { app, BrowserWindow } = require('electron')
 const url = require('url')
 const path = require('path')
-const fileHelper = require(path.join(__dirname, "src", "script", "file-helper.js"))
+const FileHelper = require(path.join(__dirname, "src", "script", "file-helper.js"))
 
 
 global.sharedObj = {
@@ -21,11 +21,15 @@ function initialChecks () {
         dataPath: path.join(__dirname, "data", "note-data.json"),
         maxNote: 1000
     }
-    fileHelper.ensureFile(configPath, defaultConfig)
-    var configData = fileHelper.readFile(configPath)
+
+    var configFile = new FileHelper(configPath)
+    configFile.ensureFile(defaultConfig)
+    var configData = configFile.readFile()
     global.sharedObj["dataPath"] = configData.dataPath
     global.sharedObj["maxNote"] = configData.maxNote
-    fileHelper.ensureFile(configData.dataPath, [])
+
+    var dataFile = new FileHelper(configData.dataPath)
+    dataFile.ensureFile([])
 }
 
 

@@ -1,26 +1,6 @@
 const fs = require('fs')
 const path = require('path')
 
-
-module.exports.readFile = function (filePath) {
-    try {
-        return JSON.parse(fs.readFileSync(filePath))
-    }
-    catch (err) {
-        console.log(err)
-    }
-}
-
-module.exports.writeFile = function (filePath, fileData) {
-    try {
-        fs.writeFileSync(filePath, JSON.stringify(fileData))
-        console.log(`data written to: ${filePath}`)
-    }
-    catch (err) {
-        console.log(err)
-    }
-}
-
 function createFile (filePath, fileData) {
     try {
         fs.appendFileSync(filePath, JSON.stringify(fileData))
@@ -29,7 +9,6 @@ function createFile (filePath, fileData) {
     catch (err) {
         console.log(err)
     }
-
 }
 
 function createFolder (folderPath) {
@@ -42,15 +21,42 @@ function createFolder (folderPath) {
     }
 }
 
-module.exports.ensureFile = function (filePath, fileData) {
-    var dirname = path.dirname(filePath)
-    if (fs.existsSync(dirname)) {
-        if (!fs.existsSync(filePath)) {
-            createFile(filePath, fileData)
+class FileHelper {
+    constructor (filePath) {
+        this.filePath = filePath
+    }
+
+    readFile () {
+        try {
+            return JSON.parse(fs.readFileSync(this.filePath))
+        }
+        catch (err) {
+            console.log(err)
         }
     }
-    else {
-        createFolder(dirname)
-        createFile(filePath, fileData)
+
+    writeFile (fileData) {
+        try {
+            fs.writeFileSync(this.filePath, JSON.stringify(fileData))
+            console.log(`data written to: ${filePath}`)
+        }
+        catch (err) {
+            console.log(err)
+        }
+    }
+
+    ensureFile (fileData) {
+        var dirname = path.dirname(this.filePath)
+        if (fs.existsSync(dirname)) {
+            if (!fs.existsSync(this.filePath)) {
+                createFile(this.filePath, fileData)
+            }
+        }
+        else {
+            createFolder(dirname)
+            createFile(fileData)
+        }
     }
 }
+
+module.exports = FileHelper

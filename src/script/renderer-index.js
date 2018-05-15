@@ -2,7 +2,7 @@ const remote = require('electron').remote
 const BrowserWindow = remote.BrowserWindow
 const url = require('url')
 const path = require('path')
-const fileHelper = require('./file-helper.js')
+const FileHelper = require('./file-helper.js')
 const ipcRenderer = require('electron').ipcRenderer
 const formatHelper = require("./format-helper.js")
 
@@ -78,13 +78,14 @@ function generateNoteId (data) {
     return id
 }
 
+var dataFile = new FileHelper(dataPath)
 
-fileHelper.ensureFile(dataPath, [])
+dataFile.ensureFile([])
 
 var indexApp = new Vue ({
     el: '#indexApp',
     data: {
-        noteData: fileHelper.readFile(dataPath)
+        noteData: dataFile.readFile()
     },
     methods: {
         editNote: function (event) {
@@ -102,7 +103,7 @@ var indexApp = new Vue ({
         deleteNote: function (event) {
             var index = findIndexOfId(this.noteData, event.currentTarget.id)
             this.noteData.splice(index, 1)
-            fileHelper.writeFile(dataPath, this.noteData)
+            dataFile.writeFile(this.noteData)
         },
         openSettings: function () {
             createChildWindow(settingsWindow, mainWindow, settingsUrl, 400, 600, false)
@@ -128,11 +129,11 @@ var indexApp = new Vue ({
 
 ipcRenderer.on("addNewNote", function(evt, data) {
     indexApp.noteData.unshift(data)
-    fileHelper.writeFile(dataPath, indexApp.noteData)
+    dataFile.writeFile(indexApp.noteData)
 })
 
 ipcRenderer.on("editNote", function(evt, data) {
     var index = findIndexOfId(indexApp.noteData, data.key)
     indexApp.noteData.splice(index, 1, data)
-    fileHelper.writeFile(dataPath, indexApp.noteData)
+    dataFile.writeFile(indexApp.noteData)
 })
