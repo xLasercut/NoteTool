@@ -5,6 +5,7 @@
         <title>Edit Note</title>
         <link rel="stylesheet" href="../../css/main.css" type="text/css">
         <script src="../script/vue.js"></script>
+        <script src="../script/fontawesome-all.js"></script>
     </head>
     <body>
         <div id="editNoteApp">
@@ -17,7 +18,7 @@
             </div>
             <div class="formatBtnContainer">
                 <div class="formatBtnContainerInner">
-                    <button class="btn" v-for="button in buttons" v-on:click="addTag(button)">{{ button }}</button>
+                    <button class="btn" v-for="button in buttons" v-on:click="addTag(button.tag)" v-html="button.value"></button>
                 </div>
             </div>
             <div class="bodyContainer">
