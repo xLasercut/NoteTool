@@ -113,7 +113,8 @@ body {
 .formatBtnContainerInner {
     height: 100%;
     width: 90%;
-    margin-left: 5%;
+    margin-left: calc(5% + 1px);
+    margin-right: auto;
 }
 
 .bodyContainer {
@@ -135,6 +136,8 @@ body {
     width: 94%;
     text-align: center;
     font-family: inherit;
+    margin-right: auto;
+    margin-left: auto;
     font-size: 14pt;
     color: black;
     background-color: var(--desert-sand);
@@ -150,13 +153,15 @@ body {
     height: 94%;
     resize: none;
     text-align: justify;
-    margin: none;
+    margin-left: auto;
+    margin-right: auto;
     padding: none;
     border: 1px solid var(--japanese-indigo);
     font-family: inherit;
     font-size: 12pt;
     background-color: var(--desert-sand);
     color: black;
+    overflow-y: auto;
 }
 
 .inputBody:focus {

@@ -3,11 +3,11 @@ const electron = require('electron')
 const { app, BrowserWindow } = require('electron')
 const url = require('url')
 const path = require('path')
-const FileHelper = require(path.join(__dirname, "src", "script", "file-helper.js"))
+const FileHelper = require('./src/script/file-helper.js')
 
 
 global.sharedObj = {
-    debug: false,
+    debug: true,
     configPath: path.join(__dirname, "config.json")
 }
 

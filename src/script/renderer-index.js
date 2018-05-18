@@ -4,7 +4,6 @@ const url = require('url')
 const path = require('path')
 const FileHelper = require('./file-helper.js')
 const ipcRenderer = require('electron').ipcRenderer
-const formatHelper = require("./format-helper.js")
 
 let mainWindow = remote.getCurrentWindow()
 let addNoteWindow
@@ -120,9 +119,6 @@ var indexApp = new Vue ({
                 }
                 createChildWindow(addNoteWindow, mainWindow, addNoteUrl, 600, 800, true, data)
             }
-        },
-        compileMessage(message) {
-            return formatHelper.renderItems(message)
         }
     }
 })

@@ -13,7 +13,7 @@
             </div>
 
             <div class="titleContainer">
-                <input class="inputTitle" v-model="noteTitle">
+                <div class="inputTitle" ref="noteTitle" contenteditable="true"></div>
             </div>
             <div class="formatBtnContainer">
                 <div class="formatBtnContainerInner">
@@ -21,7 +21,7 @@
                 </div>
             </div>
             <div class="bodyContainer">
-                <textarea class="inputBody" ref="ta" v-model="noteBody"></textarea>
+                <div class="inputBody" ref="noteBody" contenteditable="true"></div>
             </div>
             <div class="btnContainer">
                 <button class="btn btnRed" v-on:click="cancelEditNote">Cancel</a>

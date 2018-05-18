@@ -1,25 +1,27 @@
 const ipcRenderer = require('electron').ipcRenderer
 const remote = require('electron').remote
-const formatHelper = require("./format-helper.js")
+const FormatManager = require('./format-manager.js')
 
 var currentWindow = remote.getCurrentWindow()
 var parentWindow = currentWindow.getParentWindow()
+
+var formatManager = new FormatManager()
 
 var editNoteApp = new Vue({
     el: '#editNoteApp',
     data: {
         key: '',
-        noteTitle: '',
-        noteBody: '',
-        buttons: formatHelper.getFormatBtns()
+        buttons: formatManager.getBtns()
     },
     methods: {
         saveEdittedNote: function () {
-            if (this.noteTitle && this.noteBody) {
+            var noteTitle = this.$refs.noteTitle.innerHTML
+            var noteBody = this.$refs.noteBody.innerHTML
+            if (noteTitle && noteBody) {
                 var note = {
                     key: this.key,
-                    title: this.noteTitle,
-                    message: this.noteBody
+                    title: noteTitle,
+                    message: noteBody
                 }
                 parentWindow.webContents.send("editNote", note)
             }
@@ -29,16 +31,7 @@ var editNoteApp = new Vue({
             currentWindow.close()
         },
         addTag: function (tag) {
-            var textarea = this.$refs.ta
-            var startPosition = textarea.selectionStart
-            var endPosition = textarea.selectionEnd
-
-            if (startPosition - endPosition === 0) {
-                this.noteBody = this.noteBody.substring(0, startPosition) + `[${tag}][_${tag}]` + this.noteBody.substring(startPosition, this.noteBody.length)
-            }
-            else {
-                this.noteBody = this.noteBody.substring(0, startPosition) + `[${tag}]` + this.noteBody.substring(startPosition, endPosition) + `[_${tag}]` + this.noteBody.substring(endPosition, this.noteBody.length)
-            }
+            formatManager.addFormat(tag)
         }
     }
 })
@@ -46,6 +39,6 @@ var editNoteApp = new Vue({
 
 ipcRenderer.on("editNoteData", function(evt, data) {
     editNoteApp.key = data.key
-    editNoteApp.noteTitle = data.title
-    editNoteApp.noteBody = data.message
+    editNoteApp.$refs.noteTitle.innerHTML = data.title
+    editNoteApp.$refs.noteBody.innerHTML = data.message
 })
