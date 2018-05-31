@@ -7,8 +7,14 @@ const FileHelper = require('./src/script/file-helper.js')
 
 
 global.sharedObj = {
-    debug: true,
+    debug: false,
     configPath: path.join(__dirname, "config.json")
+}
+
+for (var item of process.argv) {
+    if (item == "-debug") {
+        global.sharedObj.debug = true
+    }
 }
 
 const debug = global.sharedObj.debug

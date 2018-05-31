@@ -134,6 +134,7 @@ body {
 
 .inputTitle {
     width: 94%;
+    height: 25px;
     text-align: center;
     font-family: inherit;
     margin-right: auto;
@@ -142,6 +143,8 @@ body {
     color: black;
     background-color: var(--desert-sand);
     border: 1px solid var(--japanese-indigo);
+    overflow-y: auto;
+    resize: none;
 }
 
 .inputTitle:focus {
